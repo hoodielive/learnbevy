@@ -1,4 +1,4 @@
-#![allow(unused)]
+#![allow(unused_variables)]
 
 use bevy::prelude::*;
 
