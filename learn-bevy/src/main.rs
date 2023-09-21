@@ -59,7 +59,6 @@ pub fn people_ready_for_hire(
         println!("{} is ready for hire", person.name);
     }
 }
-
 pub fn person_does_job(
     person_query: Query<(&Person, &Employed)>
 ) {
