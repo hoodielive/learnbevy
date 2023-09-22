@@ -23,3 +23,10 @@ pub fn spawn_player(
         Player {},
     ));
 }
+
+pub fn spawn_camera(let window = window_que commands.spawn(Camera2dBundle {
+        transform: Transform::from_xyz(window.width() / 2.0, window.height / 2.0, 0.0)..default(),
+});
+}
+..defaul
+    }
