@@ -38,6 +38,7 @@ initialize_player(
     PLAYER_WIDTH / 2.0,
     PLAYER_HEIGHT / 2.0,
 );
+
 initialize_player(
     &mut commands,
     cat_sprite.clone(),
