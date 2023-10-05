@@ -30,7 +30,7 @@ fn setup(mut commands: Commands, asset_server: Res<AssetServer>) {
     });
 }
 
-let cat_sprite = asset_server.load("textures/cat-sprite.png");
+const cat_sprite = asset_server.load("textures/cat-sprite.png");
 initialize_player(
     &mut commands,
     cat_sprite.clone(),
