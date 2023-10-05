@@ -30,12 +30,9 @@ fn setup(mut commands: Commands, asset_server: Res<AssetServer>) {
     });
 }
 
-<<<<<<< HEAD
 const cat_sprite = asset_server.load("textures/cat-sprite.png");
-=======
 let cat_sprite = asset_server.load("textures/cat-sprite.png");
 
->>>>>>> 56127234bc6359e1a04c858455cfa99b5c95aa38
 initialize_player(
     &mut commands,
     cat_sprite.clone(),
