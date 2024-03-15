@@ -1,3 +1,4 @@
+#![allow(dead_code)]
 use bevy::prelude::*;
 
 // Apps are containers for both logic and data
@@ -21,9 +22,10 @@ use bevy::prelude::*;
 fn main() 
 {
     App::new()
+
         // DefaultPlugins adds core plugins that all your game
         // to render on a window provided by your OS.
-        // It is usually 'always' added.
+        
         .add_plugins(DefaultPlugins)
         .add_systems(Update, hello_world_system)
         .run();
@@ -32,4 +34,58 @@ fn main()
 fn hello_world_system()
 {
     println!("Hello, World!")
+}
+
+mod game
+{
+    use bevy::app::PluginGroupBuilder;
+    use super::logic::LogicPlugin;
+    use super::camera::CameraPlugin;
+    use super::physics::PhysicsPlugin;
+
+    pub struct GamePlugins;
+
+    impl PluginGroup for GamePlugins
+    {
+        fn build(self) -> PluginGroupBuilder
+        {
+            PluginGroupBuilder::start::<Self>()
+                .add(CameraPlugin::default())
+                .add(PhysicsPlugin::default())
+                .add(LogicPlugin)
+        }
+    }
+}
+
+// We create a plugin by implementing Plugin on a struct
+// and defining a method (build) which should mutate the
+// App passed to it by performing the necessary setup such
+// as adding systems, resources and events to your game:
+
+pub struct CameraPlugin
+{
+    debug: bool,    
+}
+
+impl Plugin for CameraPlugin
+{
+    fn build(&self, app: &mut App)
+    {
+        app.add_systems(Startup, initialize_camera);
+
+        if self.debug
+        {
+            app.add_plugins(DebugCameraPlugin)
+        }
+    }
+}
+
+fn initialize_camera(mut commands: Commands)
+{
+    commands.spawn(Camera2dBundle::default());
+}
+
+fn DebugCameraPlugin()
+{
+    unimplemented!()    
 }
