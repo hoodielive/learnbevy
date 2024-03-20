@@ -132,14 +132,14 @@ They are singletons - there is only 1 instance of a Resource available accross a
 A type that can be uniquely added to a World, existing as a single instance. 
 
 `
-# An ambient light, which lights the entire scene equally.
+// An ambient light, which lights the entire scene equally.
 #[derive(Resource, Clone, Debug, ExtractResource, Reflect)]
 #[reflect(Resource)]
 pub struct AmbientLight
 {
     pub color: Color,
 
-    # A direct scale factor multiplied with color before being passed to shader.
+    // A direct scale factor multiplied with color before being passed to shader.
 
     pub brightness: f32,
 }
