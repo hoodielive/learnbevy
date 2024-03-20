@@ -16,6 +16,7 @@ struct Velocity {
 fn main() {
     App::new()
         .add_systems(Startup, spawn_spaceship)
+        .add_systems(Update, (update_position, print_position))
         .add_plugins(DefaultPlugins)
         .run();
 }
