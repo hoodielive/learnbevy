@@ -42,7 +42,7 @@ Similar to performing SELECT and UPDATE operations in a database.
 
 The App struct ties together all the elements of the ECS architecture and executes your code.
 
-`rust
+`
 fn main()
 {
     App::new()
@@ -50,3 +50,80 @@ fn main()
         .run();
 }
 `
+
+Data: Your game's data.
+
+Schedule: List of systems and their run order.
+
+Runner Function: Manages the application's event loop. Each frame it executes Bevy's internal systems and
+your application layer.
+
+# Code example
+
+`
+# Cargo.toml
+[package]
+name = "name of project"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+bevy = "0.12.0"
+
+# Enable a small amount of optimization in debug mode
+[profile-dev]
+opt-level = 1
+
+# Enable high optimizations
+[profile.dev.package."*"]
+opt-level = 3
+`
+
+# Basic 
+
+`
+#![allow(dead_code)]
+
+use bevy::prelude::*;
+
+#[derive(Component, Debug)]
+struct Position { x: f32, y: 32 }
+
+#[derive(Component, Debug)]
+struct Velocity { x: f32, y: 32 }
+
+fn main()
+{
+    // Main game loop
+    // This is an event loop. As such will run until closed.
+
+    App::new
+        .add_systems(Startup, spawn_spaceship)
+        .add_systems(Update, (update_position, print_position))
+        .add_plugins(DefaultPlugins)
+        .run();
+}
+
+fn spawn_spaceship(mut commands: Commands)
+{
+    commands.spawn(( Position { x: 0, y: 0 }, Velocity { x: 1.0, y: 1.0 }));
+}
+
+fn update_position(mut query: Query<(&Position, &mut Velocity)>)
+{
+    for (position, velocity) in query.iter_mut()
+    {
+        position.x += velocity.x;
+        position.y += velocity.y;
+    }
+}
+
+fn print_position(query: Query<(Entity, &Position)>)
+{
+    for (entity, position) in query.iter_mut()
+    {
+        info!("Entity {:?} is at position {:?}", entity, position);
+    }
+}
+`
+
