@@ -42,14 +42,14 @@ Similar to performing SELECT and UPDATE operations in a database.
 
 The App struct ties together all the elements of the ECS architecture and executes your code.
 
-`
+```
 fn main()
 {
     App::new()
         .add_plugins(DefaultPlugins)
         .run();
 }
-`
+```
 
 Data: Your game's data.
 
@@ -60,7 +60,7 @@ your application layer.
 
 # Code example
 
-`
+```
 # Cargo.toml
 [package]
 name = "name of project"
@@ -77,11 +77,11 @@ opt-level = 1
 # Enable high optimizations
 [profile.dev.package."*"]
 opt-level = 3
-`
+```
 
 # Basic 
 
-`
+```
 #![allow(dead_code)]
 
 use bevy::prelude::*;
@@ -125,13 +125,13 @@ fn print_position(query: Query<(Entity, &Position)>)
         info!("Entity {:?} is at position {:?}", entity, position);
     }
 }
-`
+```
 
 # Resources
 They are singletons - there is only 1 instance of a Resource available accross all systems.
 A type that can be uniquely added to a World, existing as a single instance. 
 
-`
+```
 // An ambient light, which lights the entire scene equally.
 #[derive(Resource, Clone, Debug, ExtractResource, Reflect)]
 #[reflect(Resource)]
@@ -143,5 +143,4 @@ pub struct AmbientLight
 
     pub brightness: f32,
 }
-
-`
+```
